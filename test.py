@@ -12,7 +12,7 @@ iris = datasets.load_iris()
 X = iris.data[:, :2]
 print(X)
 y = iris.target
-print(y)
+
 h = .02
 
 # Create color maps
