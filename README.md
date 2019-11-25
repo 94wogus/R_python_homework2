@@ -34,15 +34,38 @@ wine_df = read_csv(csv_path)
 print(wine_df)
 ```
 ...  
-...
+...  
+...  
+...  
+...  
 
-다음과 같은 결과가 나옵니다.
 ![ex_screenshot](./result/1.png)
 
-#### 1.2.2. Make Wine Dataframe
-Pandas를 사용해 wine_data.csv파일을 wine 데이터프레임을 만듭니다.
+#### 1.2.2. Wine Dataframe Describe
+Wine Dataframe에서 describe 메소드를 사용하여 요약통계량을 구합니다.
 ```python
-from pandas import read_csv
-csv_path = './wine_data.csv'
-wine_df = read_csv(csv_path)
+print(wine_df.describe())
+```
+![ex_screenshot](./result/2.png)
+
+#### 1.2.3. train test set 만들기
+pop을 활용하여 DataFrame에서 Class Column을 지움과 동시에 y 변수에 할당합니다.
+```python
+from sklearn.model_selection import train_test_split
+y = wine_df.pop('Class')
+print(y)
+```
+```text
+0      1
+1      1
+2      1
+3      1
+4      1
+      ..
+173    3
+174    3
+175    3
+176    3
+177    3
+Name: Class, Length: 178, dtype: int64
 ```

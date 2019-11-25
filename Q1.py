@@ -20,12 +20,12 @@ print(wine_df)
 section("1.2 wine describe")
 # 1.2 Wine 데이터에 describe 메소드를 사용하여 요약통계량을 구한다.
 print(wine_df.describe())
-#
-# section("1.3 train test set")
-# # pop을 활용하여 DataFrame에서 Class Column을 지움과 동시에 y 변수에 할당한다.
-# from sklearn.model_selection import train_test_split
-# y = wine_df.pop('Class')
-# print(y.head())
+
+section("1.3 train test set")
+# pop을 활용하여 DataFrame에서 Class Column을 지움과 동시에 y 변수에 할당한다.
+from sklearn.model_selection import train_test_split
+y = wine_df.pop('Class')
+print(y)
 #
 # # train test set를 0.3의 비율로 분리한다"
 # # y의 비율을 유지하며 나누기 위해 stratify를 설정한다.
