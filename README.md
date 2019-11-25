@@ -37,7 +37,7 @@ wine_df = read_csv(csv_path)
 print(wine_df.head())
 ```
 다음과 같은 결과가 나옵니다.
-```shell script
+```text
    Class  Alcohol  Malic acid   Ash  Alcalinity of ash  Magnesium  Total phenols  Flavanoids  Nonflavanoid phenols  Proanthocyanins  Color intensity   Hue  OD280/OD315 of diluted wines  Proline
 0      1    14.23        1.71  2.43               15.6        127           2.80        3.06                  0.28             2.29             5.64  1.04                          3.92     1065
 1      1    13.20        1.78  2.14               11.2        100           2.65        2.76                  0.26             1.28             4.38  1.05                          3.40     1050
