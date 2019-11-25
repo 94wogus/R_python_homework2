@@ -252,6 +252,7 @@ print(wine_df)
 
 [178 rows x 14 columns]
 ```
+### a
 #### 2.2.2. train test set 만들기
 ```python
 # pop을 활용하여 DataFrame에서 Class Column을 지움과 동시에 y 변수에 할당합니다.
@@ -285,6 +286,7 @@ Score_with_train_set: 100.0%
 Score_with_test_set: 94.44%
 0.9444444444444444
 ```
+### a
 ### a
 ### a
 ### a
