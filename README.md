@@ -111,6 +111,8 @@ Score_with_train_set: 79.84%
 Score_with_test_set: 68.52%
 0.6851851851851852
 ```
+### a
+### a
 #### 1.2.5. Train KNN model(neighbors=3)
 다시한번 Scikit-learn의 KNeighborsClassifier를 사용하여 70%인 X_train과 y_train을 바탕으로 모형을 트레이닝 시킵니다.  
 n_neighbors은 3으로 설정 하였습니다.
