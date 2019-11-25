@@ -50,25 +50,43 @@ print(wine_df.describe())
 asdsa
 
 #### 1.2.3. train test set 만들기
-pop을 활용하여 DataFrame에서 Class Column을 지움과 동시에 y 변수에 할당합니다.
 ```python
+# pop을 활용하여 DataFrame에서 Class Column을 지움과 동시에 y 변수에 할당합니다.
 from sklearn.model_selection import train_test_split
 y = wine_df.pop('Class')
-print(y)
+
+# train test set를 0.3의 비율로 분리합니다.
+# 또한 데이터의 비율을 y의 비율과 일치 시키기 위해 stratify를 설정합니다.
+X_train, X_test, y_train, y_test = train_test_split(wine_df, y, test_size=0.3, stratify=y)
+```
+
+asdsa
+#### 1.2.4. Train KNN model(neighbors=5)
+Scikit-learn의 KNeighborsClassifier를 사용하여 70%인 X_train과 y_train을 바탕으로 모형을 트레이닝 시킵니다.
+n_neighbors은 5로 설정 하였습니다.
+```python
+from sklearn.neighbors import KNeighborsClassifier
+n_neighbors = 5
+print("n_neighbors: {}".format(n_neighbors))
+wine_knn_5 = KNeighborsClassifier(n_neighbors=n_neighbors, p=2, metric='minkowski')
+wine_knn_5.fit(X_train, y_train)
+
+# Model에 대하여 Train Set의 예측값을 출력 합니다.
+train_score = wine_knn_5.score(X_train, y_train)
+print("Score_with_train_set: {}%".format(round(train_score*100, 2)))
+print(wine_knn_5.score(X_train, y_train))
+
+# Model에 대하여 Test Set의 예측값을 출력 합니다.
+test_score = wine_knn_5.score(X_test, y_test)
+print("Score_with_test_set: {}%".format(round(test_score*100, 2)))
+print(wine_knn_5.score(X_test, y_test))
 ```
 ```text
-0      1
-1      1
-2      1
-3      1
-4      1
-      ..
-173    3
-174    3
-175    3
-176    3
-177    3
-Name: Class, Length: 178, dtype: int64
+n_neighbors: 5
+Score_with_train_set: 80.65%
+0.8064516129032258
+Score_with_test_set: 68.52%
+0.6851851851851852
 ```
-asdsad  
-asdasd
+
+
