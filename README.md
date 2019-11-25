@@ -208,8 +208,8 @@ Score_with_train_set: 70.37%
 ### 2. 새 알고리즘을 적용해야 할 상황
 ### 2.1. 문제 개요
 문제 상황: A라는 학생 본인은 인턴쉽 도중 와인데이터를 활용한 결과 Q1에 대해서 B라는 대리에게 보고했다.  
-B라는 대리는 support vector machine이라는 기법이란 것이 있으며, 자기가 모형 파라미터 값만 줄 테니 조금 다른 모형을 예측만 해서 결과값만 알려달라고 하였다.  
-B대리는 다음과 같은 분석 조건에 내걸었다.
+B라는 대리는 support vector machine이라는 기법이란 것이 있으며, 자기가 모형 파라미터 값만 줄 테니   
+조금 다른 모형을 예측만 해서 결과값만 알려달라고 하였다. B대리는 다음과 같은 분석 조건에 내걸었다.
 
 1.	모형” from sklearn.svm import SVC
 2.	SVC 파라미터는 (kernel='linear', C=1.0, gamma='auto')
@@ -218,3 +218,61 @@ B대리는 다음과 같은 분석 조건에 내걸었다.
 5.	이 Training 된 모형을 바탕으로 Test Set에서 원래의 라벨을 얼마나 정확하게 예측하는지 percentage 단위로 출력한다
 
 ### 2.2. 분석 진행
+#### 2.2.1. Make Wine Dataframe
+Pandas를 사용해 wine_data.csv파일을 wine 데이터프레임을 만듭니다.
+```python
+from pandas import read_csv
+csv_path = './wine_data.csv'
+wine_df = read_csv(csv_path)
+
+print(wine_df)
+```
+```text
+     Class  Alcohol  Malic acid   Ash  Alcalinity of ash  Magnesium  Total phenols  Flavanoids  Nonflavanoid phenols  Proanthocyanins  Color intensity   Hue  OD280/OD315 of diluted wines  Proline
+0        1    14.23        1.71  2.43               15.6        127           2.80        3.06                  0.28             2.29             5.64  1.04                          3.92     1065
+1        1    13.20        1.78  2.14               11.2        100           2.65        2.76                  0.26             1.28             4.38  1.05                          3.40     1050
+2        1    13.16        2.36  2.67               18.6        101           2.80        3.24                  0.30             2.81             5.68  1.03                          3.17     1185
+3        1    14.37        1.95  2.50               16.8        113           3.85        3.49                  0.24             2.18             7.80  0.86                          3.45     1480
+4        1    13.24        2.59  2.87               21.0        118           2.80        2.69                  0.39             1.82             4.32  1.04                          2.93      735
+..     ...      ...         ...   ...                ...        ...            ...         ...                   ...              ...              ...   ...                           ...      ...
+173      3    13.71        5.65  2.45               20.5         95           1.68        0.61                  0.52             1.06             7.70  0.64                          1.74      740
+174      3    13.40        3.91  2.48               23.0        102           1.80        0.75                  0.43             1.41             7.30  0.70                          1.56      750
+175      3    13.27        4.28  2.26               20.0        120           1.59        0.69                  0.43             1.35            10.20  0.59                          1.56      835
+176      3    13.17        2.59  2.37               20.0        120           1.65        0.68                  0.53             1.46             9.30  0.60                          1.62      840
+177      3    14.13        4.10  2.74               24.5         96           2.05        0.76                  0.56             1.35             9.20  0.61                          1.60      560
+
+[178 rows x 14 columns]
+```
+#### 2.2.2. train test set 만들기
+```python
+# pop을 활용하여 DataFrame에서 Class Column을 지움과 동시에 y 변수에 할당합니다.
+from sklearn.model_selection import train_test_split
+y = wine_df.pop('Class')
+
+# train test set를 0.3의 비율로 분리합니다.
+# 또한 데이터의 비율을 y의 비율과 일치 시키기 위해 stratify를 설정합니다.
+X_train, X_test, y_train, y_test = train_test_split(wine_df, y, test_size=0.3, stratify=y)
+```
+#### 2.2.3. SVC 모델 학습 및 예측값 출력하기
+```python
+# Scikit-learn의 SVC 사용하여 70%인 X_train과 y_train을 바탕으로 모형을 트레이닝 시킵니다.
+from sklearn.svm import SVC
+SVC_model = SVC(kernel='linear', C=1.0, gamma='auto')
+SVC_model.fit(X_train, y_train)
+
+# Model에 대하여 Train Set의 예측값을 출력 합니다.
+train_score = SVC_model.score(X_train, y_train)
+print("Score_with_train_set: {}%".format(round(train_score*100, 2)))
+print(train_score)
+
+# Model에 대하여 Test Set의 예측값을 출력 합니다.
+test_score = SVC_model.score(X_test, y_test)
+print("Score_with_test_set: {}%".format(round(test_score*100, 2)))
+print(test_score)
+```
+```text
+Score_with_train_set: 100.0%
+1.0
+Score_with_test_set: 94.44%
+0.9444444444444444
+```

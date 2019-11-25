@@ -1,5 +1,4 @@
 import math
-import pandas as pd
 
 # 출력 결과물 도와주는 함수 정의하였습니다.
 def section(str, start=False):
