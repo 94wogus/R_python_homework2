@@ -14,11 +14,12 @@ section("# 1.1 make wine dataframe")
 from pandas import read_csv
 csv_path = './wine_data.csv'
 wine_df = read_csv(csv_path)
-print(wine_df.head())
 
-# section("1.2 wine describe")
-# # 1.2 Wine 데이터에 describe 메소드를 사용하여 요약통계량을 구한다.
-# print(wine_df.describe())
+print(wine_df)
+
+section("1.2 wine describe")
+# 1.2 Wine 데이터에 describe 메소드를 사용하여 요약통계량을 구한다.
+print(wine_df.describe())
 #
 # section("1.3 train test set")
 # # pop을 활용하여 DataFrame에서 Class Column을 지움과 동시에 y 변수에 할당한다.
