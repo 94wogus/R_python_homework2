@@ -76,7 +76,7 @@ X_train, X_test, y_train, y_test = train_test_split(wine_df, y, test_size=0.3, s
 ```
 
 #### 1.2.4. Train KNN model(neighbors=5)
-Scikit-learn의 KNeighborsClassifier를 사용하여 70%인 X_train과 y_train을 바탕으로 모형을 트레이닝 시킵니다.
+Scikit-learn의 KNeighborsClassifier를 사용하여 70%인 X_train과 y_train을 바탕으로 모형을 트레이닝 시킵니다.  
 n_neighbors은 5로 설정 하였습니다.
 ```python
 from sklearn.neighbors import KNeighborsClassifier
@@ -97,10 +97,109 @@ print(wine_knn_5.score(X_test, y_test))
 ```
 ```text
 n_neighbors: 5
-Score_with_train_set: 80.65%
-0.8064516129032258
+Score_with_train_set: 79.84%
+0.7983870967741935
 Score_with_test_set: 68.52%
 0.6851851851851852
+```
+#### 1.2.5. Train KNN model(neighbors=3)
+다시한번 Scikit-learn의 KNeighborsClassifier를 사용하여 70%인 X_train과 y_train을 바탕으로 모형을 트레이닝 시킵니다.  
+n_neighbors은 3으로 설정 하였습니다.
+```python
+n_neighbors = 3
+print("n_neighbors: {}".format(n_neighbors))
+wine_knn_3 = KNeighborsClassifier(n_neighbors=n_neighbors, p=2, metric='minkowski')
+wine_knn_3.fit(X_train, y_train)
+
+# Model에 대하여 Train Set의 예측값을 출력 합니다.
+train_score = wine_knn_3.score(X_train, y_train)
+print("Score_with_train_set: {}%".format(round(train_score*100, 2)))
+print(wine_knn_5.score(X_train, y_train))
+
+# Model에 대하여 Test Set의 예측값을 출력 합니다.
+test_score = wine_knn_3.score(X_test, y_test)
+print("Score_with_train_set: {}%".format(round(test_score*100, 2)))
+print(wine_knn_5.score(X_test, y_test))
+```
+```text
+n_neighbors: 3
+Score_with_train_set: 87.1%
+0.7983870967741935
+Score_with_train_set: 70.37%
+0.6851851851851852
+```
+
+#### 1.2.6. Change X data
+X 데이터를 Alchol, Malic acid, Ash, Alcalinity of ash 네 변수만 활용하여 다시 수행합니다
+```python
+# 'Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash' 행만 X로 설정합니다.
+X = wine_df.loc[:, ['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash']]
+print(X)
+
+# train test set를 0.3의 비율로 분리합니다"
+# y의 비율을 유지하며 나누기 위해 stratify를 설정합니다.
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, stratify=y)
+
+# Scikit-learn의 KNeighborsClassifier를 사용하여 70%인 X_train과 y_train을 바탕으로 모형을 트레이닝 시킵다.
+n_neighbors = 5
+print("n_neighbors: {}".format(n_neighbors))
+wine_knn_5 = KNeighborsClassifier(n_neighbors=n_neighbors, p=2, metric='minkowski')
+wine_knn_5.fit(X_train, y_train)
+
+# Model에 대하여 Train Set의 예측값을 출력 합니다.
+train_score = wine_knn_5.score(X_train, y_train)
+print("Score_with_train_set: {}%".format(round(train_score*100, 2)))
+print(wine_knn_5.score(X_train, y_train))
+
+# Model에 대하여 Test Set의 예측값을 출력 합니다.
+test_score = wine_knn_5.score(X_test, y_test)
+print("Score_with_train_set: {}%".format(round(test_score*100, 2)))
+print(wine_knn_5.score(X_test, y_test))
+
+
+n_neighbors = 3
+print("n_neighbors: {}".format(n_neighbors))
+wine_knn_3 = KNeighborsClassifier(n_neighbors=n_neighbors, p=2, metric='minkowski')
+wine_knn_3.fit(X_train, y_train)
+
+# Model에 대하여 Train Set의 예측값을 출력 합니다.
+train_score = wine_knn_3.score(X_train, y_train)
+print("Score_with_train_set: {}%".format(round(train_score*100, 2)))
+print(wine_knn_3.score(X_train, y_train))
+
+# Model에 대하여 Test Set의 예측값을 출력 합니다.
+test_score = wine_knn_3.score(X_test, y_test)
+print("Score_with_train_set: {}%".format(round(test_score*100, 2)))
+print(wine_knn_3.score(X_test, y_test))
+```
+```text
+[X data]
+     Alcohol  Malic acid   Ash  Alcalinity of ash
+0      14.23        1.71  2.43               15.6
+1      13.20        1.78  2.14               11.2
+2      13.16        2.36  2.67               18.6
+3      14.37        1.95  2.50               16.8
+4      13.24        2.59  2.87               21.0
+..       ...         ...   ...                ...
+173    13.71        5.65  2.45               20.5
+174    13.40        3.91  2.48               23.0
+175    13.27        4.28  2.26               20.0
+176    13.17        2.59  2.37               20.0
+177    14.13        4.10  2.74               24.5
+
+[178 rows x 4 columns]
+
+n_neighbors: 5
+Score_with_train_set: 84.68%
+0.8467741935483871
+Score_with_train_set: 79.63%
+0.7962962962962963
+
+n_neighbors: 3
+Score_with_train_set: 88.71%
+0.8870967741935484
+Score_with_train_set: 70.37%
+0.7037037037037037
 ```
 
 
