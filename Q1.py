@@ -1,8 +1,6 @@
 import math
 import pandas as pd
 
-pd.options.display.max_columns = 10
-
 # 출력 결과물 도와주는 함수 정의하였습니다.
 def section(str, start=False):
     l = (120 - len(str)) / 2
@@ -36,24 +34,24 @@ print(X_train.head(), "X_train", '\n')
 print(X_test.head(), "X_test", '\n')
 print(y_train.head(), "y_train", '\n')
 print(y_test.head(), "y_test", '\n')
-
-section("1.4 ~ 1.6 train KNeighborsClassifier model / n_neighbors=5")
-# Scikit-learn의 KNeighborsClassifier를 사용하여 70%인 X_train과 y_train을 바탕으로 모형을 트레이닝 시킵니다.
-from sklearn.neighbors import KNeighborsClassifier
-n_neighbors = 5
-print("n_neighbors: {}".format(n_neighbors))
-wine_knn_5 = KNeighborsClassifier(n_neighbors=n_neighbors, p=2, metric='minkowski')
-wine_knn_5.fit(X_train, y_train)
-
-# Model에 대하여 Train Set의 예측값을 출력 합니다.
-train_score = wine_knn_5.score(X_train, y_train)
-print("Score_with_train_set: {}%".format(round(train_score*100, 2)))
-print(wine_knn_5.score(X_train, y_train))
-
-# Model에 대하여 Test Set의 예측값을 출력 합니다.
-test_score = wine_knn_5.score(X_test, y_test)
-print("Score_with_test_set: {}%".format(round(test_score*100, 2)))
-print(wine_knn_5.score(X_test, y_test))
+#
+# section("1.4 ~ 1.6 train KNeighborsClassifier model / n_neighbors=5")
+# # Scikit-learn의 KNeighborsClassifier를 사용하여 70%인 X_train과 y_train을 바탕으로 모형을 트레이닝 시킵니다.
+# from sklearn.neighbors import KNeighborsClassifier
+# n_neighbors = 5
+# print("n_neighbors: {}".format(n_neighbors))
+# wine_knn_5 = KNeighborsClassifier(n_neighbors=n_neighbors, p=2, metric='minkowski')
+# wine_knn_5.fit(X_train, y_train)
+#
+# # Model에 대하여 Train Set의 예측값을 출력 합니다.
+# train_score = wine_knn_5.score(X_train, y_train)
+# print("Score_with_train_set: {}%".format(round(train_score*100, 2)))
+# print(wine_knn_5.score(X_train, y_train))
+#
+# # Model에 대하여 Test Set의 예측값을 출력 합니다.
+# test_score = wine_knn_5.score(X_test, y_test)
+# print("Score_with_test_set: {}%".format(round(test_score*100, 2)))
+# print(wine_knn_5.score(X_test, y_test))
 #
 # section("1.7 train KNeighborsClassifier model / n_neighbors=3")
 # from sklearn.neighbors import KNeighborsClassifier
