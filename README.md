@@ -1,9 +1,9 @@
 # R+Python 컴퓨팅: Homework 2
 
 ## 목차
-1. [와인 클래스에 대한 kNN 알고리즘 적용]()  
-1.1. [문제 개요]()  
-1.2. [분석 진행]()
+1. [와인 클래스에 대한 kNN 알고리즘 적용](#1-와인-클래스에-대한-knn-알고리즘-적용)  
+1.1. [문제 개요](#11-문제-개요)  
+1.2. [분석 진행](#12-분석-진행)
 
 ## 1. 와인 클래스에 대한 kNN 알고리즘 적용
 ### 1.1. 문제 개요
@@ -140,7 +140,8 @@ print(X)
 # y의 비율을 유지하며 나누기 위해 stratify를 설정합니다.
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, stratify=y)
 
-# Scikit-learn의 KNeighborsClassifier를 사용하여 70%인 X_train과 y_train을 바탕으로 모형을 트레이닝 시킵다.
+# Scikit-learn의 KNeighborsClassifier를 사용하여 
+# 70%인 X_train과 y_train을 바탕으로모형을 트레이닝 시킵니다.
 n_neighbors = 5
 print("n_neighbors: {}".format(n_neighbors))
 wine_knn_5 = KNeighborsClassifier(n_neighbors=n_neighbors, p=2, metric='minkowski')
