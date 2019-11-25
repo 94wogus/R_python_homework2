@@ -40,14 +40,14 @@ print(wine_df)
 
 ![ex_screenshot](./result/1.png)
 
-...  asdsa
+asdsa
 #### 1.2.2. Wine Dataframe Describe
 Wine Dataframe에서 describe 메소드를 사용하여 요약통계량을 구합니다.
 ```python
 print(wine_df.describe())
 ```
 ![ex_screenshot](./result/2.png)
-...  asdsa
+asdsa
 
 #### 1.2.3. train test set 만들기
 pop을 활용하여 DataFrame에서 Class Column을 지움과 동시에 y 변수에 할당합니다.
