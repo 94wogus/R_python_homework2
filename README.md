@@ -26,6 +26,9 @@ def section(str, start=False):
         print('\n')
     print("= "*math.ceil(l) + str.upper() + " ="*math.floor(l))
 ``` 
+### a
+### a
+### a
 ### 1.2. 분석 진행
 #### 1.2.1. Make Wine Dataframe
 Pandas를 사용해 wine_data.csv파일을 wine 데이터프레임을 만듭니다.
