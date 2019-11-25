@@ -42,6 +42,8 @@ print(wine_df)
 
 ![ex_screenshot](./result/1.png)
 
+...  
+...  
 #### 1.2.2. Wine Dataframe Describe
 Wine Dataframe에서 describe 메소드를 사용하여 요약통계량을 구합니다.
 ```python
