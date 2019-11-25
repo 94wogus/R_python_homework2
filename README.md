@@ -285,7 +285,10 @@ Score_with_train_set: 100.0%
 Score_with_test_set: 94.44%
 0.9444444444444444
 ```
-
+### a
+### a
+### a
+### a
 ## 3. K-means Clustering 알고리즘
 ### 3.1. 문제 개요
 K-means Clustering을 활용하여 분석을 진행한다.
