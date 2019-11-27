@@ -10,6 +10,7 @@
 3. [K-means Clustering 알고리즘](#3-k-means-clustering-알고리즘)  
 3.1. [문제 개요](#31-문제-개요)  
 3.2. [분석 진행](#32-분석-진행)
+3.2. [분석 진행](#32-분석-진행)
 ## 1. 와인 클래스에 대한 kNN 알고리즘 적용
 ### 1.1. 문제 개요
 [wine_data.csv](https://github.com/94wogus/R_python_homework2/blob/master/wine_data.csv)
@@ -375,3 +376,255 @@ plt.xticks(ks)
 plt.savefig('./result/inertia.png')
 ```
 ![inertia](./result/inertia.png)
+
+## 4. 부록
+### 4.1. Q1.py
+```python
+import math
+
+# 출력 결과물 도와주는 함수 정의하였습니다.
+def section(str, start=False):
+    l = (120 - len(str)) / 2
+    if not start:
+        print('\n')
+    print("= "*math.ceil(l) + str.upper() + " ="*math.floor(l))
+
+
+section("Q1 와인 클래스에 대한 kNN 알고리즘 적용", start=True)
+section("# 1.1 make wine dataframe")
+# 1.1 Pandas를 사용해 wine_data.csv파일을 wine 데이터프레임을 만듭니다.
+from pandas import read_csv
+csv_path = './wine_data.csv'
+wine_df = read_csv(csv_path)
+
+print(wine_df)
+
+section("1.2 wine describe")
+# 1.2 Wine 데이터에 describe 메소드를 사용하여 요약통계량을 구합니다.
+print(wine_df.describe(), '\n')
+
+section("1.3 train test set")
+# pop을 활용하여 DataFrame에서 Class Column을 지움과 동시에 y 변수에 할당합니다.
+from sklearn.model_selection import train_test_split
+y = wine_df.pop('Class')
+
+# train test set를 0.3의 비율로 분리합니다.
+# 또한 데이터의 비율을 y의 비율과 일치 시키기 위해 stratify를 설정합니다.
+X_train, X_test, y_train, y_test = train_test_split(wine_df, y, test_size=0.3, stratify=y)
+print("[X_train]")
+print(X_train, '\n')
+print("[X_test]")
+print(X_test, '\n')
+print("[y_train]")
+print(y_train, '\n')
+print("[y_test]")
+print(y_test, '\n')
+
+section("1.4 ~ 1.6 train KNeighborsClassifier model / n_neighbors=5")
+# Scikit-learn의 KNeighborsClassifier를 사용하여 70%인 X_train과 y_train을 바탕으로 모형을 트레이닝 시킵니다.
+from sklearn.neighbors import KNeighborsClassifier
+n_neighbors = 5
+print("n_neighbors: {}".format(n_neighbors))
+wine_knn_5 = KNeighborsClassifier(n_neighbors=n_neighbors, p=2, metric='minkowski')
+wine_knn_5.fit(X_train, y_train)
+
+# Model에 대하여 Train Set의 예측값을 출력 합니다.
+train_score = wine_knn_5.score(X_train, y_train)
+print("Score_with_train_set: {}%".format(round(train_score*100, 2)))
+print(wine_knn_5.score(X_train, y_train))
+
+# Model에 대하여 Test Set의 예측값을 출력 합니다.
+test_score = wine_knn_5.score(X_test, y_test)
+print("Score_with_test_set: {}%".format(round(test_score*100, 2)))
+print(wine_knn_5.score(X_test, y_test))
+
+section("1.7 train KNeighborsClassifier model / n_neighbors=3")
+from sklearn.neighbors import KNeighborsClassifier
+n_neighbors = 3
+print("n_neighbors: {}".format(n_neighbors))
+wine_knn_3 = KNeighborsClassifier(n_neighbors=n_neighbors, p=2, metric='minkowski')
+wine_knn_3.fit(X_train, y_train)
+
+# Model에 대하여 Train Set의 예측값을 출력 합니다.
+train_score = wine_knn_3.score(X_train, y_train)
+print("Score_with_train_set: {}%".format(round(train_score*100, 2)))
+print(wine_knn_5.score(X_train, y_train))
+
+# Model에 대하여 Test Set의 예측값을 출력 합니다.
+test_score = wine_knn_3.score(X_test, y_test)
+print("Score_with_train_set: {}%".format(round(test_score*100, 2)))
+print(wine_knn_5.score(X_test, y_test))
+
+
+section("1.8 Change X data")
+# 'Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash' 행만 X로 설정합니다.
+X = wine_df.loc[:, ['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash']]
+print(X, '\n')
+
+# train test set를 0.3의 비율로 분리합니다"
+# y의 비율을 유지하며 나누기 위해 stratify를 설정합니다.
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, stratify=y)
+print("[X_train]")
+print(X_train.head(), '\n')
+print("[X_test]")
+print(X_test.head(), '\n')
+print("[y_train]")
+print(y_train.head(), '\n')
+print("[y_test]")
+print(y_test.head(), '\n')
+
+# Scikit-learn의 KNeighborsClassifier를 사용하여 70%인 X_train과 y_train을 바탕으로 모형을 트레이닝 시킵다.
+n_neighbors = 5
+print('n_neighbors')
+wine_knn_5 = KNeighborsClassifier(n_neighbors=n_neighbors, p=2, metric='minkowski')
+wine_knn_5.fit(X_train, y_train)
+
+# Model에 대하여 Train Set의 예측값을 출력 합니다.
+train_score = wine_knn_5.score(X_train, y_train)
+print("Score_with_train_set: {}%".format(round(train_score*100, 2)))
+print(wine_knn_5.score(X_train, y_train))
+
+# Model에 대하여 Test Set의 예측값을 출력 합니다.
+test_score = wine_knn_5.score(X_test, y_test)
+print("Score_with_train_set: {}%".format(round(test_score*100, 2)))
+print(wine_knn_5.score(X_test, y_test))
+
+
+n_neighbors = 3
+print("n_neighbors: {}".format(n_neighbors))
+wine_knn_3 = KNeighborsClassifier(n_neighbors=n_neighbors, p=2, metric='minkowski')
+wine_knn_3.fit(X_train, y_train)
+
+# Model에 대하여 Train Set의 예측값을 출력 합니다.
+train_score = wine_knn_3.score(X_train, y_train)
+print("Score_with_train_set: {}%".format(round(train_score*100, 2)))
+print(wine_knn_3.score(X_train, y_train))
+
+# Model에 대하여 Test Set의 예측값을 출력 합니다.
+test_score = wine_knn_3.score(X_test, y_test)
+print("Score_with_train_set: {}%".format(round(test_score*100, 2)))
+print(wine_knn_3.score(X_test, y_test))
+```
+### 4.2. Q2.py
+```python
+import math
+
+def section(str, start=False):
+    l = (120 - len(str)) / 2
+    if not start:
+        print('\n')
+    print("= "*math.ceil(l) + str.upper() + " ="*math.floor(l))
+
+section("Q2 새 알고리즘을 적용해야 할 상황", start=True)
+section("# 2.1 make wine dataframe")
+# 2.1 Pandas를 사용해 wine_data.csv파일을 wine 데이터프레임을 만듭니다.
+from pandas import read_csv
+csv_path = './wine_data.csv'
+wine_df = read_csv(csv_path)
+print(wine_df)
+
+section("2.2 make train test set")
+# pop을 활용하여 DataFrame에서 Class Column을 지움과 동시에 y 변수에 할당합니다.
+from sklearn.model_selection import train_test_split
+y = wine_df.pop('Class')
+
+# train test set를 0.3의 비율로 분리합니다.
+# 또한 데이터의 비율을 y의 비율과 일치 시키기 위해 stratify를 설정합니다.
+X_train, X_test, y_train, y_test = train_test_split(wine_df, y, test_size=0.3, stratify=y)
+print("[X_train]")
+print(X_train, '\n')
+print("[X_test]")
+print(X_test, '\n')
+print("[y_train]")
+print(y_train, '\n')
+print("[y_test]")
+print(y_test, '\n')
+
+# Scikit-learn의 SVC 사용하여 70%인 X_train과 y_train을 바탕으로 모형을 트레이닝 시킵니다.
+from sklearn.svm import SVC
+SVC_model = SVC(kernel='linear', C=1.0, gamma='auto')
+SVC_model.fit(X_train, y_train)
+
+# Model에 대하여 Train Set의 예측값을 출력 합니다.
+train_score = SVC_model.score(X_train, y_train)
+print("Score_with_train_set: {}%".format(round(train_score*100, 2)))
+print(train_score)
+
+# Model에 대하여 Test Set의 예측값을 출력 합니다.
+test_score = SVC_model.score(X_test, y_test)
+print("Score_with_test_set: {}%".format(round(test_score*100, 2)))
+print(test_score)
+```
+### 4.3. Q3.py
+```python
+import matplotlib.pyplot as plt
+import mglearn
+import math
+
+def section(str, start=False):
+    l = (120 - len(str)) / 2
+    if not start:
+        print('\n')
+    print("= "*math.ceil(l) + str.upper() + " ="*math.floor(l))
+
+
+section("Q3 K-means Clustering 알고리즘", start=True)
+section("# 3.1 make X data")
+# Pandas를 사용해 wine_data.csv파일을 읽어 들입니다.
+from pandas import read_csv
+csv_path = './wine_data.csv'
+wine_df = read_csv(csv_path)
+
+# Class column 제거
+y = wine_df.pop('Class')
+X = wine_df
+
+section("# 3.2 Train K-means Clustering Model")
+# K-means Clustering Model을 구성합니다.
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.cluster import KMeans
+from pandas import crosstab
+import numpy
+
+# KMeans 모델을 학습 시킵니다.
+X_normalized = MinMaxScaler().fit(X).transform(X)
+model = KMeans(n_clusters=3, algorithm='auto')
+model.fit(X_normalized)
+
+# 분류 모델과 실제 라벨을 비교 해봅니다.
+pt = crosstab(y, model.labels_)
+print(pt)
+
+# Figure를 출력합니다.
+plt.figure(1)
+mglearn.discrete_scatter(X_normalized[:, 0], X_normalized[:, 1], model.labels_, markers='o')
+mglearn.discrete_scatter(
+    model.cluster_centers_[:, 0],
+    model.cluster_centers_[:, 1],
+    y=numpy.unique(model.labels_),
+    markers='^',
+    markeredgewidth=2  # marker, 두께
+)
+plt.savefig('./result/3_n_clusters.png')
+
+section("# 3.3 find cluster number")
+ks = range(1, 10)
+inertias = []
+
+# 클러스터의 갯수를 변화시키면서 inertia를 확인합니다.
+for k in ks:
+    model = KMeans(n_clusters=k)
+    model.fit(X_normalized)
+    inertias.append(model.inertia_)
+print(inertias)
+
+# 그래프로 출력합니다.
+plt.figure(2)
+plt.plot(ks, inertias, '-o')
+plt.xlabel('number of clusters, k')
+plt.ylabel('inertia')
+plt.xticks(ks)
+plt.savefig('./result/inertia.png')
+```
+### 4.4 Code Source
+Github code: [R_python_homework2](https://github.com/94wogus/R_python_homework2)
