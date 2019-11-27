@@ -10,7 +10,6 @@
 3. [K-means Clustering 알고리즘](#3-k-means-clustering-알고리즘)  
 3.1. [문제 개요](#31-문제-개요)  
 3.2. [분석 진행](#32-분석-진행)
-### a
 ## 1. 와인 클래스에 대한 kNN 알고리즘 적용
 ### 1.1. 문제 개요
 [wine_data.csv](https://github.com/94wogus/R_python_homework2/blob/master/wine_data.csv)
@@ -26,9 +25,6 @@ def section(str, start=False):
         print('\n')
     print("= "*math.ceil(l) + str.upper() + " ="*math.floor(l))
 ``` 
-### a
-### a
-### a
 ### 1.2. 분석 진행
 #### 1.2.1. Make Wine Dataframe
 Pandas를 사용해 wine_data.csv파일을 wine 데이터프레임을 만듭니다.
@@ -72,7 +68,6 @@ min      1.000000   11.030000    0.740000    1.360000          10.600000   70.00
 75%      3.000000   13.677500    3.082500    2.557500          21.500000  107.000000       2.800000    2.875000              0.437500         1.950000         6.200000    1.120000                      3.170000   985.000000
 max      3.000000   14.830000    5.800000    3.230000          30.000000  162.000000       3.880000    5.080000              0.660000         3.580000        13.000000    1.710000                      4.000000  1680.000000
 ```
-### a
 #### 1.2.3. train test set 만들기
 ```python
 # pop을 활용하여 DataFrame에서 Class Column을 지움과 동시에 y 변수에 할당합니다.
@@ -83,7 +78,6 @@ y = wine_df.pop('Class')
 # 또한 데이터의 비율을 y의 비율과 일치 시키기 위해 stratify를 설정합니다.
 X_train, X_test, y_train, y_test = train_test_split(wine_df, y, test_size=0.3, stratify=y)
 ```
-### a
 #### 1.2.4. Train KNN model(neighbors=5)
 Scikit-learn의 KNeighborsClassifier를 사용하여 70%인 X_train과 y_train을 바탕으로 모형을 트레이닝 시킵니다.  
 n_neighbors은 5로 설정 하였습니다.
@@ -111,8 +105,6 @@ Score_with_train_set: 79.84%
 Score_with_test_set: 68.52%
 0.6851851851851852
 ```
-### a
-### a
 #### 1.2.5. Train KNN model(neighbors=3)
 다시한번 Scikit-learn의 KNeighborsClassifier를 사용하여 70%인 X_train과 y_train을 바탕으로 모형을 트레이닝 시킵니다.  
 n_neighbors은 3으로 설정 하였습니다.
@@ -213,7 +205,6 @@ Score_with_train_set: 88.71%
 Score_with_train_set: 70.37%
 0.7037037037037037
 ```
-### a
 ### 2. 새 알고리즘을 적용해야 할 상황
 ### 2.1. 문제 개요
 문제 상황: A라는 학생 본인은 인턴쉽 도중 와인데이터를 활용한 결과 Q1에 대해서 B라는 대리에게 보고했다.  
@@ -252,7 +243,6 @@ print(wine_df)
 
 [178 rows x 14 columns]
 ```
-### a
 #### 2.2.2. train test set 만들기
 ```python
 # pop을 활용하여 DataFrame에서 Class Column을 지움과 동시에 y 변수에 할당합니다.
@@ -286,11 +276,6 @@ Score_with_train_set: 100.0%
 Score_with_test_set: 94.44%
 0.9444444444444444
 ```
-### a
-### a
-### a
-### a
-### a
 ## 3. K-means Clustering 알고리즘
 ### 3.1. 문제 개요
 K-means Clustering을 활용하여 분석을 진행한다.
