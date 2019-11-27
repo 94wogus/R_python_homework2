@@ -10,7 +10,11 @@
 3. [K-means Clustering 알고리즘](#3-k-means-clustering-알고리즘)  
 3.1. [문제 개요](#31-문제-개요)  
 3.2. [분석 진행](#32-분석-진행)
-3.2. [분석 진행](#32-분석-진행)
+4. [부록](#4-부록)  
+4.1. [Q1.py](#41-q1py)  
+4.2. [Q2.py](#42-q2py)  
+4.3. [Q3.py](#43-q3py)  
+4.4. [Code Source](#44-code-source)
 ## 1. 와인 클래스에 대한 kNN 알고리즘 적용
 ### 1.1. 문제 개요
 [wine_data.csv](https://github.com/94wogus/R_python_homework2/blob/master/wine_data.csv)
